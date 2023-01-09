@@ -16,7 +16,7 @@ internal class AllNotes
     {
         Notes.Clear();
 
-        await Task.Delay(3000);
+        await Task.Delay(2000);
             string appDataPath = FileSystem.AppDataDirectory;
 
             IEnumerable<Note> notes = Directory.EnumerateFiles(appDataPath, "*.notes.txt")
@@ -32,7 +32,7 @@ internal class AllNotes
             foreach (Note note in notes)
                 Notes.Add(note);
 
-        await Task.Delay(3000);
+        await Task.Delay(2000);
 
 
         return true;
