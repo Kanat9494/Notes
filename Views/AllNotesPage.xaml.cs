@@ -39,8 +39,8 @@ public partial class AllNotesPage : ContentPage
         //    isLoading = await ((Models.AllNotes)BindingContext).LoadNotes();
         //}).GetAwaiter().OnCompleted(() =>
         //{
-        //        loader.IsVisible = false;
-        //        loader.IsRunning = false;
+        //    loader.IsVisible = false;
+        //    loader.IsRunning = false;
         //});
 
         //Ётот метод работает
@@ -76,16 +76,26 @@ public partial class AllNotesPage : ContentPage
         //});
 
         //Ќовый способ, тоже работает но есть не точности
+        //Task.Run(async () =>
+        //{
+        //    await ((Models.AllNotes)BindingContext).LoadNotes();
+        //}).GetAwaiter().OnCompleted(() =>
+        //{
+        //    App.Current.Dispatcher.Dispatch(() =>
+        //    {
+        //        loader.IsVisible = false;
+        //        loader.IsRunning = false;
+        //    });
+        //});
+
+        //“оже работает
         Task.Run(async () =>
         {
             await ((Models.AllNotes)BindingContext).LoadNotes();
         }).GetAwaiter().OnCompleted(() =>
         {
-            App.Current.Dispatcher.Dispatch(() =>
-            {
-                loader.IsVisible = false;
-                loader.IsRunning = false;
-            });
+            loader.IsRunning = false;
+            loader.IsVisible = false;
         });
     }
 
