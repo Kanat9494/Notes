@@ -32,13 +32,60 @@ public partial class AllNotesPage : ContentPage
         loader.IsVisible = true;
         loader.IsRunning = true;
         bool isLoading = false;
+
+        //Этот вариант работает только если метод LoadNotes возвращает значение
+        //Task.Run(async () =>
+        //{
+        //    isLoading = await ((Models.AllNotes)BindingContext).LoadNotes();
+        //}).GetAwaiter().OnCompleted(() =>
+        //{
+        //        loader.IsVisible = false;
+        //        loader.IsRunning = false;
+        //});
+
+        //Этот метод работает
+        //App.Current.Dispatcher.Dispatch(async () =>
+        //{
+        //    await ((Models.AllNotes)BindingContext).LoadNotes();
+        //});
+
+        //Этот способ тоже работает
+        //App.Current.Dispatcher.Dispatch(async () =>
+        //{
+        //    Task.Run(async () =>
+        //    {
+        //        await ((Models.AllNotes)BindingContext).LoadNotes();
+        //    }).GetAwaiter().OnCompleted(() =>
+        //    {
+        //        loader.IsRunning = false;
+        //        loader.IsVisible = false;
+        //    });
+        //});
+
+        //Этот способ тоже работает, плюс к тому же он работает с меньшими лагами чем другие
+        //App.Current.Dispatcher.Dispatch(() =>
+        //{
+        //    Task.Run(async () =>
+        //    {
+        //        await ((Models.AllNotes)BindingContext).LoadNotes();
+        //    }).GetAwaiter().OnCompleted(() =>
+        //    {
+        //        loader.IsRunning = false;
+        //        loader.IsVisible = false;
+        //    });
+        //});
+
+        //Новый способ, тоже работает но есть не точности
         Task.Run(async () =>
         {
-            isLoading = await ((Models.AllNotes)BindingContext).LoadNotes();
+            await ((Models.AllNotes)BindingContext).LoadNotes();
         }).GetAwaiter().OnCompleted(() =>
         {
+            App.Current.Dispatcher.Dispatch(() =>
+            {
                 loader.IsVisible = false;
                 loader.IsRunning = false;
+            });
         });
     }
 
