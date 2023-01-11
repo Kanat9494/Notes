@@ -1,5 +1,4 @@
-﻿using Java.Security;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Notes.Models;
@@ -32,7 +31,7 @@ internal class AllNotes
                 .OrderBy(note => note.Date);
 
             notesToBeAddedd = notes.Take(25).ToList();
-            foreach (Note note in notesToBeAddedd)
+            foreach (Note note in notes)
                 Notes.Add(note);
 
         await Task.Delay(2000);
