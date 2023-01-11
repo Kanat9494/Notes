@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Notes.Views.AllNotesPage"
+             xmlns:models="clr-namespace:Notes.Models"
              Title="AllNotesPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
@@ -17,19 +18,19 @@
             SelectionMode="Single"
             SelectionChanged="notesCollection_SelectionChanged"
             >
-            <CollectionView.ItemsLayout>
+            <!--<CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-            </CollectionView.ItemsLayout>
+            </CollectionView.ItemsLayout>-->
 
             <CollectionView.Header>
                 <ActivityIndicator x:Name="loader" Color="Green"/>
             </CollectionView.Header>
 
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate >
                     <StackLayout>
-                        <Label Text="{Binding Text, Mode=OneTime}" FontSize="22" />
-                        <Label Text="{Binding Date, Mode=OneTime}" FontSize="14" TextColor="Silver" />
+                        <Label Text="{Binding Text}" FontSize="22" />
+                        <Label Text="{Binding Date}" FontSize="14" TextColor="Silver" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
