@@ -2,6 +2,7 @@
 
 namespace Notes;
 
+[XamlCompilation(XamlCompilationOptions.Compile)]
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()

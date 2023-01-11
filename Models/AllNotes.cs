@@ -1,10 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using Java.Security;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Notes.Models;
 
 internal class AllNotes
 {
     public ObservableCollection<Note> Notes { get; set; } = new ObservableCollection<Note>();
+    public static List<Note> notesToBeAddedd = new List<Note>();
 
     public AllNotes() =>
         Task.Run(async () =>
@@ -28,14 +31,15 @@ internal class AllNotes
                 })
                 .OrderBy(note => note.Date);
 
-
-            foreach (Note note in notes)
+            notesToBeAddedd = notes.Take(25).ToList();
+            foreach (Note note in notesToBeAddedd)
                 Notes.Add(note);
 
         await Task.Delay(2000);
 
 
     }
+
 
     //public async Task<bool> LoadNotes()
     //{

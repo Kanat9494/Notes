@@ -6,29 +6,34 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
     </ContentPage.ToolbarItems>
+    
+    <!--Если обернуть CollectionView в ScrollView то все работает, прокрутка является плавной-->
+    <ScrollView>
+        <CollectionView 
+            x:Name="notesCollection"
+            ItemsSource="{Binding Notes}"
+            Margin="20"
+            SelectionMode="Single"
+            SelectionChanged="notesCollection_SelectionChanged"
+            RemainingItemsThreshold="1"
+            RemainingItemsThresholdReachedCommand="LoadMore"
+            >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
 
+            <CollectionView.Header>
+                <ActivityIndicator x:Name="loader" Color="Green"/>
+            </CollectionView.Header>
 
-    <CollectionView 
-        x:Name="notesCollection"
-        ItemsSource="{Binding Notes}"
-        Margin="20"
-        SelectionMode="Single"
-        SelectionChanged="notesCollection_SelectionChanged">
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-        </CollectionView.ItemsLayout>
-
-        <CollectionView.Header>
-            <ActivityIndicator x:Name="loader" Color="Green"/>
-        </CollectionView.Header>
-
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>
-                    <Label Text="{Binding Text}" FontSize="22"/>
-                    <Label Text="{Binding Date}" FontSize="14" TextColor="Silver"/>
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Text}" FontSize="22"/>
+                        <Label Text="{Binding Date}" FontSize="14" TextColor="Silver"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
 </ContentPage>

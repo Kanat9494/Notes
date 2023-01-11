@@ -11,6 +11,7 @@ public partial class AllNotesPage : ContentPage
 		loader.IsVisible = true;
 		bool isTrue = false;
 
+
 		//Task.Run(async () =>
 		//{
 		//	isTrue = await ((Models.AllNotes)BindingContext).LoadNotes();
@@ -133,4 +134,6 @@ public partial class AllNotesPage : ContentPage
 			notesCollection.SelectedItem = null;
 		}
 	}
+
+
 }
