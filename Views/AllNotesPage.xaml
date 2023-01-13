@@ -9,7 +9,8 @@
     </ContentPage.ToolbarItems>
     
     <!--Если обернуть CollectionView в ScrollView то все работает, прокрутка является плавной-->
-    <StackLayout>
+    <Grid>
+
         <CollectionView 
             x:Name="notesCollection"
             ItemsSource="{Binding Notes}"
@@ -18,9 +19,9 @@
             SelectionMode="Single"
             SelectionChanged="notesCollection_SelectionChanged"
             >
-            <!--<CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-            </CollectionView.ItemsLayout>-->
+            <CollectionView.ItemsLayout >
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"  />
+            </CollectionView.ItemsLayout>
 
             <CollectionView.Header>
                 <ActivityIndicator x:Name="loader" Color="Green"/>
@@ -35,5 +36,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </StackLayout>
+    </Grid>
 </ContentPage>

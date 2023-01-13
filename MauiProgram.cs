@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
+﻿
 namespace Notes;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -14,7 +13,8 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+			})
+			.UseSharpnadoCollectionView(loggerEnable: false);
 
 
 #if DEBUG
